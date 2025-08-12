@@ -7,9 +7,8 @@ on:
       - '**.gradle'
   workflow_dispatch:
 
-#  If you can't post workflow_dispatch event, use this
-#  schedule:
-#    - cron: '0/5 * * * *'
+  schedule:
+    - cron: '20 14 * * 2'
 
 jobs:
   build:
@@ -22,7 +21,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 21
           cache: gradle
 
       - name: Run Gradle
@@ -185,6 +184,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m ${{ env.version }} -a
+          git tag ${{ env.version }}
           cd ..
 
       - name: Push version store file
@@ -195,6 +195,7 @@ jobs:
           ssh: true
           branch: version
           directory: version
+          tags: true
 
       - name: Summary Output (Success)
         if: env.fail == 'false'
