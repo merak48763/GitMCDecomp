@@ -8,7 +8,9 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '20 14 * * 2'
+    # Temp schedule to generate version history
+    - cron: '0/5 * * * *'
+#    - cron: '20 14 * * *'
 
 jobs:
   build:
