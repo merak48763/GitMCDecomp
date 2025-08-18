@@ -166,6 +166,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m ${{ env.version }} -a
+          git tag ${{ env.version }}
           cd ..
 
       - name: Push new version files
@@ -176,6 +177,7 @@ jobs:
           ssh: true
           branch: ${{ env.branch_write }}
           directory: write
+          tags: true
 
       - name: Commit version store file
         if: env.fail == 'false'
@@ -186,7 +188,6 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m ${{ env.version }} -a
-          git tag ${{ env.version }}
           cd ..
 
       - name: Push version store file
@@ -197,7 +198,6 @@ jobs:
           ssh: true
           branch: version
           directory: version
-          tags: true
 
       - name: Summary Output (Success)
         if: env.fail == 'false'
