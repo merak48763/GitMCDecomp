@@ -1,16 +1,14 @@
 name: listen-mc-decompile
 on:
-  push:
-    paths:
-      - 'src/**'
-      - '.github/**'
-      - '**.gradle'
+#  push:
+#    paths:
+#      - 'src/**'
+#      - '.github/**'
+#      - '**.gradle'
   workflow_dispatch:
 
-  schedule:
-    # Temp schedule to generate version history
-    - cron: '0/5 * * * *'
-#    - cron: '20 14 * * *'
+#  schedule:
+#    - cron: '0/5 * * * *'
 
 jobs:
   build:
