@@ -200,6 +200,13 @@ jobs:
           branch: version
           directory: version
 
+      - name: Send notification to Discord
+        if: env.fail == 'false'
+        uses: tsickert/discord-webhook@v7.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: Decompile a new Minecraft version **${{ env.version }}**
+
       - name: Summary Output (Success)
         if: env.fail == 'false'
         run: |
