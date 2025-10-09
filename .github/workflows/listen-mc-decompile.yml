@@ -205,7 +205,7 @@ jobs:
         uses: tsickert/discord-webhook@v7.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          content: Decompile a new Minecraft version **${{ env.version }}**
+          content: Decompiled a new Minecraft version **${{ env.version }}**
 
       - name: Summary Output (Success)
         if: env.fail == 'false'
