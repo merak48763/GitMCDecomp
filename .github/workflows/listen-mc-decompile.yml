@@ -168,6 +168,8 @@ jobs:
           git add .
           git commit -m ${{ env.version }} -a
           git tag ${{ env.version }}
+          echo "new_commit_hash=$(git rev-parse HEAD)" >> $GITHUB_ENV
+          echo "new_commit_short_hash=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           cd ..
 
       - name: Push new version files
@@ -205,7 +207,9 @@ jobs:
         uses: tsickert/discord-webhook@v7.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          content: Decompiled a new Minecraft version **${{ env.version }}**
+          embed-title: Decompiled a new Minecraft version
+          embed-description: |
+            [`${{ env.new_commit_short_hash }}`](https://github.com/${{ secrets.DESTINATION }}/commit/${{ env.new_commit_hash }}) - **${{ env.version }}**
 
       - name: Summary Output (Success)
         if: env.fail == 'false'
